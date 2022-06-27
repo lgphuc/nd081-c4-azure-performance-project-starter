@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # Variables
-resourceGroup="group-perform"
+resourceGroup="group-vote-app"
 location="eastasia"
 osType="UbuntuLTS"
 vmssName="vmss-perform"
 adminName="udacityadmin"
-storageAccount="accountperform"
+storageAccount="udacitydiag$RANDOM"
 bePoolName="$vmssName-bepool"
 lbName="$vmssName-lb"
 lbRule="$lbName-network-rule"
