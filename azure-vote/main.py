@@ -21,6 +21,10 @@ from opencensus.trace import config_integration
 from opencensus.trace.samplers import ProbabilitySampler
 from opencensus.trace.tracer import Tracer
 
+# For metrics
+stats = stats_module.stats
+view_manager = stats.view_manager
+
 # Load configurations from environment or config file
 app = Flask(__name__)
 app.config.from_pyfile('config_file.cfg')
@@ -35,12 +39,7 @@ handler = AzureLogHandler(connection_string=instrumentation_key)
 handler.setFormatter(logging.Formatter("%(traceId)s %(spanId)s %(message)s"))
 logger.addHandler(handler)
 logger.addHandler(AzureEventHandler(connection_string=instrumentation_key))
-
 logger.setLevel(logging.INFO)
-
-# Metrics
-stats = stats_module.stats
-view_manager = stats.view_manager
 
 # Tracing
 tracer = Tracer(
@@ -135,4 +134,4 @@ if __name__ == "__main__":
     # Use the statement below when running locally
     # app.run() 
     # Use the statement below before deployment to VMSS
-    app.run(host='0.0.0.0', threaded=True, debug=True, port=5353) # remote
+    app.run(host='0.0.0.0', threaded=True, debug=True, port=5000) # remote
